@@ -4,12 +4,12 @@ A lightweight, LLM‑based evaluation framework to assess **retrieval** and **re
 
 ---
 
-## ✨ Why this matters
+## Why this matters
 RAG works only if your retriever hands the generator at least one **answerable** chunk. This repo measures exactly that: *“What’s the probability that at least one relevant document appears in the top‑k?”* — a practical proxy for end‑to‑end success.
 
 ---
 
-## 🧪 Evaluation Method
+## Evaluation Method
 For each query in your test set:
 1. **Retrieve & rerank** with your chosen embedding model and reranker.
 2. **Label relevance** of the top‑k docs with an LLM (binary: **YES/NO** = answer present or not).
@@ -19,7 +19,7 @@ Average **Answer Presence@k** across queries to estimate how often your system p
 
 ---
 
-## 🧰 Evaluator Class
+## Evaluator Class
 The `Evaluator` class calls an OpenAI‑compatible API (e.g., `gpt-4o-mini`, `gpt-4.1-mini`) to label each document as relevant or not.
 
 ```python
@@ -104,7 +104,7 @@ Question: {query}; Retrieved Passage: {document}"""
 
 ---
 
-## 📦 Installation
+## Installation
 ```bash
 pip install openai  # or your OpenAI-compatible client
 ```
@@ -128,7 +128,7 @@ EVAL = Evaluator(
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 ```python
 from openai import OpenAI
 
@@ -157,7 +157,7 @@ Question: {query}; Retrieved Passage: {document}
 
 ---
 
-## 🧠 Evaluating Embeddings, Rerankers, & Chunking
+## Evaluating Embeddings, Rerankers, & Chunking
 You can apply the evaluator across a test set and compare configurations.
 
 ### What can be evaluated?
@@ -199,7 +199,7 @@ print("Average Answer Presence:", avg_ap)
 
 ---
 
-## 📊 Metrics
+## Metrics
 For each cutoff **k** using the latest labels (`1` = relevant, `0` = not):
 
 - **Precision@k** = TP / k  
@@ -211,7 +211,7 @@ The framework primarily emphasizes **Answer Presence@k**, a robust proxy for a R
 
 ---
 
-## 🧯 Practical Notes & Pitfalls
+## Practical Notes & Pitfalls
 - **Cost & speed**: Labeling is cheap/fast with small models (e.g., `gpt-4o-mini`), but still scales with dataset size × top‑k.
 - **Determinism**: Keep `temperature=0`. Consider seeding sampling if your client supports it.
 - **Token limits**: Ensure chunks fit comfortably; truncate or summarize if needed.
@@ -220,17 +220,17 @@ The framework primarily emphasizes **Answer Presence@k**, a robust proxy for a R
 
 ---
 
-## 🔌 API Compatibility
+## API Compatibility
 - Works with any OpenAI‑compatible **Chat Completions** API.
 - Set `base_url` to target non‑OpenAI providers (self‑hosted, proxies, etc.).
 
 ---
 
-## 📜 License
+## License
 MIT — do whatever you want, but attribution appreciated.
 
 ---
 
-## 🙌 Acknowledgements
+## Acknowledgements
 Inspired by practical needs in building reliable RAG pipelines where recall of at least one answerable chunk matters most.
 The default prompt was found in: https://blog.ml6.eu/unsupervised-evaluation-of-semantic-retrieval-by-generating-relevance-judgments-with-an-llm-judge-ea244cc80908
