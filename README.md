@@ -113,7 +113,7 @@ If you use a compatible endpoint (e.g., self-hosted or proxy), provide `base_url
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 Set your credentials in environment variables or directly when constructing the class.
 
 ```python
